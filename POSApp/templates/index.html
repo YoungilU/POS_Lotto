@@ -1,0 +1,636 @@
+<!DOCTYPE HTML>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+    <title>CU 두정포레나</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/logos/squanchy.jpg' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/logos/squanchy.jpg' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/logos/squanchy.jpg' %}">
+    <!-- jQuery -->
+    <!-- Bootstrap4 files-->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/ui.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/fonts/fontawesome/css/fontawesome-all.min.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'assets/css/OverlayScrollbars.css' %}" type="text/css" rel="stylesheet" />
+    <!-- Font awesome 5 -->
+    <style>
+        .avatar {
+            vertical-align: middle;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .bg-default,
+        .btn-default {
+            background-color: #f2f3f8;
+        }
+
+        .btn-error {
+            color: #ef5f5f;
+        }
+    </style>
+    <!-- custom style -->
+</head>
+
+<body>
+    <section class="header-main">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <div class="brand-wrap">
+                        <img class="logo" src="{% static 'assets/images/logos/squanchy.jpg' %}">
+                        <h2 class="logo-text">CU 두정포레나</h2>
+                    </div> <!-- brand-wrap.// -->
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <form action="#" class="search-wrap">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> <!-- search-wrap .end// -->
+                </div> <!-- col.// -->
+                <div class="col-lg-3 col-sm-6">
+                    <div class="widgets-wrap d-flex justify-content-end">
+                        <div class="widget-header">
+                            <a href="#" class="icontext">
+                                <a href="#" class="btn btn-primary m-btn m-btn--icon m-btn--icon-only">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </a>
+                        </div> <!-- widget .// -->
+                        <div class="widget-header dropdown">
+                            <a href="#" class="ml-3 icontext" data-toggle="dropdown" data-offset="20,10">
+                                <img src="{% static 'assets/images/avatars/bshbsh.png' %}" class="avatar" alt="">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                            </div> <!--  dropdown-menu .// -->
+                        </div> <!-- widget  dropdown.// -->
+                    </div> <!-- widgets-wrap.// -->
+                </div> <!-- col.// -->
+            </div> <!-- row.// -->
+        </div> <!-- container.// -->
+    </section>
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content padding-y-sm bg-default ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 card padding-y-sm card " >
+                    <ul class="nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" data-toggle="pill" href="#nav-tab-card">
+                                <i class="fa fa-tags"></i> 판매</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                                <i class="fa fa-tags "></i> 환불</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                                <i class="fa fa-tags "></i> 재고</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                                <i class="fa fa-tags "></i> Admin</a>
+                        </li>
+                    </ul>
+
+                    <h2 class="sale_title">판매</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('pension_lottery_1000_list')"
+                                    class="pension_lottery_1000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 1000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('pension_lottery_5000_list')"
+                                    class="pension_lottery_5000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 5000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('instant_lottery_1000_list')"
+                                    class="instant_lottery_1000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 1000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('instant_lottery_2000_list')"
+                                    class="instant_lottery_2000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 2000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                    </div> <!-- row.// -->
+                    <hr>
+                    <h2 class="sale_title">지급</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('pension_lottery_1000_list_pay')"
+                                    class="pension_lottery_1000_pay">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 1000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('pension_lottery_5000_list_pay')"
+                                    class="pension_lottery_5000_pay">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 5000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('instant_lottery_1000_list_pay')"
+                                    class="instant_lottery_1000_pay">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 1000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select('instant_lottery_2000_list_pay')"
+                                    class="instant_lottery_2000_pay">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 2000</h2>
+                                    </div>
+                                </a>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                    </div> <!-- row.// -->
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <span id="cart">
+                            <table class="table table-hover shopping-cart-wrap">
+                                <thead class="text-muted">
+                                    <tr>
+                                        <th scope="col">Item</th>
+                                        <th scope="col" width="120">Qty</th>
+                                        <th scope="col" width="120">Price</th>
+                                        <th scope="col" class="text-right" width="200">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="pension_lottery_1000_list" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">연금 1000</h6>
+                                                    <h6 class="title text-truncate">판매</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default pension_lottery_1000_Qty">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="pension_lottery_1000_price price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="#" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="pension_lottery_5000_list" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">연금 5000</h6>
+                                                    <h6 class="title text-truncate">판매</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default pension_lottery_5000_Qty">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="pension_lottery_5000_price price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="instant_lottery_1000_list" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">즉석 1000</h6>
+                                                    <h6 class="title text-truncate">판매</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default instant_lottery_1000_Qty">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="instant_lottery_1000_price price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="instant_lottery_2000_list" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">즉석 2000</h6>
+                                                    <h6 class="title text-truncate">판매</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default instant_lottery_2000_Qty">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="instant_lottery_2000_price price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="pension_lottery_1000_list_pay" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">연금 1000</h6>
+                                                    <h6 class="title text-truncate">지급</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default pension_lottery_1000_Qty_pay">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="pension_lottery_1000_price_pay price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="pension_lottery_5000_list_pay" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">연금 5000</h6>
+                                                    <h6 class="title text-truncate">지급</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default pension_lottery_5000_Qty_pay">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="pension_lottery_5000_price_pay price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="instant_lottery_1000_list_pay" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">즉석 1000</h6>
+                                                    <h6 class="title text-truncate">지급</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default instant_lottery_1000_Qty_pay">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="instant_lottery_1000_price_pay price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="instant_lottery_2000_list_pay" style="display:none;">
+                                        <td class="list_text">
+                                            <figure class="media">
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">즉석 2000</h6>
+                                                    <h6 class="title text-truncate">지급</h6>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group"
+                                                aria-label="...">
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button"
+                                                    class="m-btn btn btn-default instant_lottery_2000_Qty_pay">0</button>
+                                                <button type="button" class="m-btn btn btn-default">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="instant_lottery_2000_price_pay price">0</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <a href="" class="btn btn-outline-danger btn-round"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                    </div> <!-- card.// -->
+                    <div class="box">
+                        <dl class="dlist-align">
+                            <dt>판 매:</dt>
+                            <dd class="text-right h4 b total_sale">0</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>지 급:</dt>
+                            <dd class="text-right h4 b total_pay">0</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>합 계:</dt>
+                            <dd class="text-right h4 b total">0</dd>
+                        </dl>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="" class="btn  btn-default btn-error btn-lg btn-block"><i
+                                        class="fa fa-times-circle "></i> 취소 </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn  btn-primary btn-lg btn-block"><i class="fa fa-shopping-bag"></i>
+                                    확인 </a>
+                            </div>
+                        </div>
+                    </div> <!-- box.// -->
+                </div>
+            </div>
+        </div><!-- container //  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    <script src="{% static 'assets/js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/OverlayScrollbars.js' %}" type="text/javascript"></script>
+    <script>
+        $(function () {
+            //The passed argument has to be at least a empty object or a object with your desired options
+            //$("body").overlayScrollbars({ });
+            $("#items").height(552);
+            $("#items").overlayScrollbars({
+                overflowBehavior: {
+                    x: "hidden",
+                    y: "scroll"
+                }
+            });
+            $("#cart").height(445);
+            $("#cart").overlayScrollbars({});
+        });
+
+        let selectedPrice = 0;
+        let selectedQty = 0;
+        let selectedTotal = 0;
+        function sale_select(select) {
+            // 클릭시 리스트 소환
+            let list = document.getElementsByClassName(select)[0];
+            list.style.cssText = 'visible;';
+
+            // Price, Qty, Total
+            if (select == 'pension_lottery_1000_list') {
+                selectedPrice = parseInt(document.getElementsByClassName('pension_lottery_1000_price')[0].innerHTML);
+                selectedPrice += 1000;
+                document.getElementsByClassName('pension_lottery_1000_price')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('pension_lottery_1000_Qty')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('pension_lottery_1000_Qty')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+                selectedTotal += 1000;
+                document.getElementsByClassName('total_sale')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'pension_lottery_5000_list') {
+                selectedPrice = parseInt(document.getElementsByClassName('pension_lottery_5000_price')[0].innerHTML);
+                selectedPrice += 5000;
+                document.getElementsByClassName('pension_lottery_5000_price')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('pension_lottery_5000_Qty')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('pension_lottery_5000_Qty')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+                selectedTotal += 5000;
+                document.getElementsByClassName('total_sale')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'instant_lottery_1000_list') {
+                selectedPrice = parseInt(document.getElementsByClassName('instant_lottery_1000_price')[0].innerHTML);
+                selectedPrice += 1000;
+                document.getElementsByClassName('instant_lottery_1000_price')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('instant_lottery_1000_Qty')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('instant_lottery_1000_Qty')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+                selectedTotal += 1000;
+                document.getElementsByClassName('total_sale')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'instant_lottery_2000_list') {
+                selectedPrice = parseInt(document.getElementsByClassName('instant_lottery_2000_price')[0].innerHTML);
+                selectedPrice += 2000;
+                document.getElementsByClassName('instant_lottery_2000_price')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('instant_lottery_2000_Qty')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('instant_lottery_2000_Qty')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+                selectedTotal += 2000;
+                document.getElementsByClassName('total_sale')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'pension_lottery_1000_list_pay') {
+                selectedPrice = parseInt(document.getElementsByClassName('pension_lottery_1000_price_pay')[0].innerHTML);
+                selectedPrice -= 1000;
+                document.getElementsByClassName('pension_lottery_1000_price_pay')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('pension_lottery_1000_Qty_pay')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('pension_lottery_1000_Qty_pay')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_pay')[0].innerHTML);
+                selectedTotal -= 1000;
+                document.getElementsByClassName('total_pay')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'pension_lottery_5000_list_pay') {
+                selectedPrice = parseInt(document.getElementsByClassName('pension_lottery_5000_price_pay')[0].innerHTML);
+                selectedPrice -= 5000;
+                document.getElementsByClassName('pension_lottery_5000_price_pay')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('pension_lottery_5000_Qty_pay')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('pension_lottery_5000_Qty_pay')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_pay')[0].innerHTML);
+                selectedTotal -= 5000;
+                document.getElementsByClassName('total_pay')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'instant_lottery_1000_list_pay') {
+                selectedPrice = parseInt(document.getElementsByClassName('instant_lottery_1000_price_pay')[0].innerHTML);
+                selectedPrice -= 1000;
+                document.getElementsByClassName('instant_lottery_1000_price_pay')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('instant_lottery_1000_Qty_pay')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('instant_lottery_1000_Qty_pay')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_pay')[0].innerHTML);
+                selectedTotal -= 1000;
+                document.getElementsByClassName('total_pay')[0].innerHTML = selectedTotal;
+            }
+            else if (select == 'instant_lottery_2000_list_pay') {
+                selectedPrice = parseInt(document.getElementsByClassName('instant_lottery_2000_price_pay')[0].innerHTML);
+                selectedPrice -= 2000;
+                document.getElementsByClassName('instant_lottery_2000_price_pay')[0].innerHTML = selectedPrice;
+
+                selectedQty = parseInt(document.getElementsByClassName('instant_lottery_2000_Qty_pay')[0].innerHTML);
+                selectedQty += 1;
+                document.getElementsByClassName('instant_lottery_2000_Qty_pay')[0].innerHTML = selectedQty;
+
+                selectedTotal = parseInt(document.getElementsByClassName('total_pay')[0].innerHTML);
+                selectedTotal -= 2000;
+                document.getElementsByClassName('total_pay')[0].innerHTML = selectedTotal;
+            }
+            let total_sale = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+            let total_pay = parseInt(document.getElementsByClassName('total_pay')[0].innerHTML);
+            document.getElementsByClassName('total')[0].innerHTML = total_sale + total_pay;
+        }
+
+
+    </script>
+</body>
+
+</html>
