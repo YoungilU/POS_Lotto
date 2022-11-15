@@ -153,7 +153,8 @@
                 <div class="col-md-4">
                     <div class="card">
                         <span id="cart">
-                            <form action="{% url 'POSApp:index' %}" method="GET">
+                            <form action="{% url 'POSApp:index' %}" method="POST">
+                                {% csrf_token %}
                             <table class="table table-hover shopping-cart-wrap">
                                 <thead class="text-muted">
                                     <tr>
