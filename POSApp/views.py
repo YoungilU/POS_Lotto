@@ -5,7 +5,13 @@ from POSApp.models import POSDB
 
 # Create your views here.
 def index(request):
-    print(POSDB.objects.all().values())
+    if request.method == "GET":
+        # TODO: 전달받은 값 DB에 저장
+        print('연금1000 개수 :', request.GET.get('pension_lottery_1000_Qty'))
+        print('연금5000 개수 :', request.GET.get('pension_lottery_5000_Qty'))
+        print('즉석1000 개수 :', request.GET.get('instant_lottery_1000_Qty'))
+        print('즉석2000 개수 :', request.GET.get('instant_lottery_2000_Qty'))
+        print('지급 가격 :', request.GET.get('pay_price'))
     return render(request, "index.html")
 
 def test(request):
