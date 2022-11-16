@@ -432,10 +432,12 @@
             if (leftRight == 'left') selectedQty = parseInt(document.getElementsByClassName(select + '_Qty')[0].innerHTML) - 1;
             else selectedQty = parseInt(document.getElementsByClassName(select + '_Qty')[0].innerHTML) + 1;
             document.getElementsByClassName(select + '_Qty')[0].innerHTML = selectedQty;
+            document.getElementsByClassName(select + '_Qty')[1].value = String(selectedQty);
 
             // Price 수정
             selectedPrice = parseInt(document.getElementsByClassName(select + '_price')[0].innerHTML) + price;
             document.getElementsByClassName(select + '_price')[0].innerHTML = selectedPrice;
+            document.getElementsByClassName(select + '_price')[1].value = String(selectedPrice);
 
             // 총액
             if (isPay == false) {
