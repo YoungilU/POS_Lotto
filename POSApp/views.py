@@ -41,5 +41,5 @@ def index(request):
         pos.save()
     return render(request, "index.html")
 
-def test(request):
-    return render(request, "index.html")
+def stock(request):
+    return render(request, "stock.html")

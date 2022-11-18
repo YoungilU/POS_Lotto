@@ -5,5 +5,5 @@ app_name = 'POSApp'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('test/', views.index, name='test'),
+    path('stock/', views.stock, name='stock'),
 ]
