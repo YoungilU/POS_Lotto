@@ -2265,3 +2265,15 @@ td.list_text{
 .text-truncate{
   text-align:center;
 }
+body > section > div > div > div.col-md-8.card.padding-y-sm.card > div > ol{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body > section > div > div > div.col-md-8.card.padding-y-sm.card > div > ol > li{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color:dimgray;
+}

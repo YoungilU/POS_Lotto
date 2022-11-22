@@ -11,3 +11,5 @@ class POSDB(models.Model):
     sale = models.IntegerField(null=True)
     pay = models.IntegerField(null=True)
     sale_time = models.DateTimeField(null=True)
+    daily_sale_start = models.DateTimeField(null=True)
+    base_balance = models.IntegerField(null=True)
