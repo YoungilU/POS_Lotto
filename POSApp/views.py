@@ -82,3 +82,10 @@ def stock(request):
         'daily_balance': base_balance + daily_sale + daily_pay,
     }
     return render(request, "stock.html", context)
+
+def adminpage(request):
+    print("asd")
+    return render(request, "adminpage.html")
+
+def login(request):
+    return render(request, "login.html")

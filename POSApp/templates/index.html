@@ -45,7 +45,7 @@
                 <div class="col-md-8 card padding-y-sm card ">
                     <ul class="nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active show" data-toggle="pill" href="#nav-tab-card">
+                            <a class="nav-link active show" data-toggle="pill" href="{% url 'POSApp:index' %}">
                                 <i class="fa fa-tags"></i> 판매</a>
                         </li>
                         <li class="nav-item">
@@ -57,7 +57,7 @@
                                 <i class="fa fa-tags "></i> 재고</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
+                            <a class="nav-link" href="{% url 'POSApp:adminpage' %}">
                                 <i class="fa fa-tags "></i> Admin</a>
                         </li>
                     </ul>
