@@ -1,10 +1,8 @@
-
 import datetime
-
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
 from POSApp.models import POSDB
-
+from django.contrib.auth.models import User
+from django.contrib import auth
 
 # Create your views here.
 def index(request):
@@ -84,8 +82,32 @@ def stock(request):
     return render(request, "stock.html", context)
 
 def adminpage(request):
-    print("asd")
     return render(request, "adminpage.html")
 
 def login(request):
     return render(request, "login.html")
+
+def signup(request):
+    res_data = None
+    print("signup")
+    if request.method == 'POST':
+        print("post")
+        useremail = request.POST.get('useremail')
+        firstname = request.POST.get('first_name')
+        lastname = request.POST.get('last_name')
+        password = request.POST.get('password')
+        re_password = request.POST.get('confirm_password')
+        res_data = {}
+        if User.objects.filter(username=useremail):
+            res_data['error'] = '※ 이미 가입된 이메일 주소 입니다.'
+        elif password != re_password:
+            res_data['error'] = '※ 비밀번호가 다릅니다.'
+        else:
+            user = User.objects.create_user(username=useremail,
+                                            first_name=firstname,
+                                            last_name=lastname,
+                                            password=password)
+            auth.login(request, user)
+            print("else")
+            return redirect("POSApp:adminpage")
+    return render(request, 'signup.html', res_data)
