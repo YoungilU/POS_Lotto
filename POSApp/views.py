@@ -82,16 +82,24 @@ def stock(request):
     return render(request, "stock.html", context)
 
 def adminpage(request):
-    return render(request, "adminpage.html")
+    if request.method == "POST":
+        useremail = request.POST.get('useremail', None)
+        password = request.POST.get('password', None)
 
-def login(request):
-    return render(request, "login.html")
+        user = auth.authenticate(username=useremail, password=password)
+        if user is not None:
+            auth.login(request, user)
+            if request.user.is_authenticated:
+                context = {'logineduser': request.user}
+            return render(request, 'adminpage.html', context)
+        else:
+            return render(request, 'adminpage.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
+    else:
+        return render(request, 'adminpage.html', )
 
 def signup(request):
     res_data = None
-    print("signup")
     if request.method == 'POST':
-        print("post")
         useremail = request.POST.get('useremail')
         firstname = request.POST.get('first_name')
         lastname = request.POST.get('last_name')
@@ -108,6 +116,11 @@ def signup(request):
                                             last_name=lastname,
                                             password=password)
             auth.login(request, user)
-            print("else")
-            return redirect("POSApp:adminpage")
+            return redirect("POSApp:index")
     return render(request, 'signup.html', res_data)
+
+def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return redirect("POSApp:index")
+

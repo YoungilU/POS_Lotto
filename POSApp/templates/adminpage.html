@@ -121,6 +121,7 @@
                                 <i class="fa fa-tags "></i> Admin</a>
                         </li>
                     </ul>
+                    {% if not logineduser %}
                     <div class="container">
                         <div class="d-flex justify-content-center h-100">
                             <div class="logincard card">
@@ -155,7 +156,13 @@
                                 </div>
                             </div>
                         </div>
+                    </div> <!-- end of login -->
+                    {% else %}
+                    <div>
+                        <h3>Sibal</h3>
+                        <a href="{% url 'POSApp:logout' %}" class="get-started-btn scrollto">로그아웃</a>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="col-md-4">
                     <div class="card">
