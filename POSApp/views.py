@@ -58,7 +58,7 @@ def stock(request):
         daily_sale += daily_list[i]['sale']
         daily_pay += daily_list[i]['pay']
 
-    date = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['sale_time']
+    daily_sale_start = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']
     context = {
         'pension_lottery_1000': pension_lottery_1000,
         'pension_lottery_5000': pension_lottery_5000,
@@ -69,6 +69,7 @@ def stock(request):
         'sale_plus_pay': daily_sale + daily_pay,
         'base_balance': base_balance,
         'daily_balance': base_balance + daily_sale + daily_pay,
+        'daily_sale_start': daily_sale_start,
     }
     return render(request, "stock.html", context)
 
