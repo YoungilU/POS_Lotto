@@ -2277,3 +2277,7 @@ body > section > div > div > div.col-md-8.card.padding-y-sm.card > div > ol > li
   font-weight: bold;
   color:dimgray;
 }
+.stock {
+    margin-top: 10px;
+    text-align: center;
+}

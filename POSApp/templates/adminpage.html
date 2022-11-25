@@ -158,10 +158,80 @@
                         </div>
                     </div> <!-- end of login -->
                     {% else %}
-                    <div>
-                        <h3>Sibal</h3>
-                        <a href="{% url 'POSApp:logout' %}" class="get-started-btn scrollto">로그아웃</a>
-                    </div>
+                    <h2 class="sale_title">재고수정</h2>
+                    <form action="{% url 'POSApp:adminpage' %}" method="POST">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="#"
+                                    class="pension_lottery_1000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 1000</h2>
+                                    </div>
+                                </a>
+                                <input type="number" class="stock" name="pension_lottery_1000" value="{{pension_lottery_1000}}">
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="#"
+                                    class="pension_lottery_5000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">연금 5000</h2>
+                                    </div>
+                                </a>
+                                <input type="number" class="stock" name="pension_lottery_5000" value="{{pension_lottery_5000}}">
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="#"
+                                    class="instant_lottery_1000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 1000</h2>
+                                    </div>
+                                </a>
+                                <input type="number" class="stock" name="instant_lottery_1000" value="{{instant_lottery_1000}}">
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="#"
+                                    class="instant_lottery_2000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">즉석 2000</h2>
+                                    </div>
+                                </a>
+                                <input type="number" class="stock" name="instant_lottery_2000" value="{{instant_lottery_2000}}">
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                    </div> <!-- row.// -->
+                    <hr>
+                    <h2 class="sale_title">시재금 수정</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href=""
+                                    class="pension_lottery_1000">
+                                    <div class="img-wrap">
+                                        <h2 class="card_title">기본시재금</h2>
+                                    </div>
+                                </a>
+                                <input type="number" class="stock" name="base_balance" value="{{base_balance}}">
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                    </div> <!-- row.// -->
+                        <div class="box">
+
+                        <div class="row">
+
+                            <div class="col-md-6" style="margin:auto; width:100px;">
+                                <input type="submit" value="수정" class="btn btn-primary btn-lg btn-block">
+                            </div>
+                        </div>
+                    </div> <!-- box.// -->
+                    </form>
                     {% endif %}
                 </div>
                 <div class="col-md-4">

@@ -30,10 +30,6 @@ def index(request):
         pay = int(request.POST.get('pay_price'))
         pos.pay = pay
 
-        # 잔고
-        prev_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['balance']
-        pos.balance = prev_balance + sale + pay
-
         # 판매시간
         pos.sale_time = datetime.datetime.now().replace(microsecond=0)
 
@@ -51,7 +47,7 @@ def stock(request):
     pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
     instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
     instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
-    balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['balance']
+    # balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['balance']
 
     daily_list = POSDB.objects.filter(daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']).values()
 
@@ -61,11 +57,6 @@ def stock(request):
     for i in range(len(daily_list)):
         daily_sale += daily_list[i]['sale']
         daily_pay += daily_list[i]['pay']
-    print("금일 판매금액:", daily_sale)
-    print("금일 지급금액: ", daily_pay)
-    print("판매 + 지급:", daily_sale + daily_pay)
-    print("기본 시제금액:", base_balance)
-    print("금고 보관금액:", base_balance + daily_sale + daily_pay)
 
     date = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['sale_time']
     context = {
@@ -83,18 +74,63 @@ def stock(request):
 
 def adminpage(request):
     if request.method == "POST":
-        useremail = request.POST.get('useremail', None)
-        password = request.POST.get('password', None)
+        if request.POST.get('pension_lottery_1000'):
+            print("1",request.POST.get('pension_lottery_1000'))
+            pos = POSDB()
+            pos.pension_lottery_1000 = int(request.POST.get('pension_lottery_1000'))
+            pos.pension_lottery_5000 = int(request.POST.get('pension_lottery_5000'))
+            pos.instant_lottery_1000 = int(request.POST.get('instant_lottery_1000'))
+            pos.instant_lottery_2000 = int(request.POST.get('instant_lottery_2000'))
+            pos.base_balance = int(request.POST.get('base_balance'))
+            pos.sale_time = datetime.datetime.now().replace(microsecond=0)
+            pos.daily_sale_start = datetime.datetime.now().replace(microsecond=0)
+            pos.pay = 0
+            pos.sale = 0
+            pos.save()
+            return render(request, 'adminpage.html')
+        elif request.POST.get('useremail'):
+            useremail = request.POST.get('useremail', None)
+            password = request.POST.get('password', None)
+            user = auth.authenticate(username=useremail, password=password)
+            if user is not None:
+                auth.login(request, user)
+                if request.user.is_authenticated:
+                    pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
+                    pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
+                    instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
+                    instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+                    daily_list = POSDB.objects.filter(daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']).values()
 
-        user = auth.authenticate(username=useremail, password=password)
-        if user is not None:
-            auth.login(request, user)
-            if request.user.is_authenticated:
-                context = {'logineduser': request.user}
-            return render(request, 'adminpage.html', context)
-        else:
-            return render(request, 'adminpage.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
+                    base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
+                    daily_sale = 0
+                    daily_pay = 0
+                    for i in range(len(daily_list)):
+                        daily_sale += daily_list[i]['sale']
+                        daily_pay += daily_list[i]['pay']
+                    context = {
+                        'logineduser': request.user,
+                        'pension_lottery_1000': pension_lottery_1000,
+                        'pension_lottery_5000': pension_lottery_5000,
+                        'instant_lottery_1000': instant_lottery_1000,
+                        'instant_lottery_2000': instant_lottery_2000,
+                        'sale_plus_pay': daily_sale + daily_pay,
+                        'base_balance': base_balance,
+                    }
+                return render(request, 'adminpage.html', context)
+            else:
+                return render(request, 'adminpage.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else:
+
+        # if request.method == "POST":
+        #     pos = POSDB()
+        #     pos.pension_lottery_1000 = int(request.GET.get('pension_lottery_1000'))
+        #     pos.pension_lottery_5000 = int(request.GET.get('pension_lottery_5000'))
+        #     pos.instant_lottery_1000 = int(request.GET.get('instant_lottery_1000'))
+        #     pos.instant_lottery_2000 = int(request.GET.get('instant_lottery_2000'))
+        #     pos.base_balance = int(request.GET.get('base_balance'))
+        #     pos.sale_time = datetime.datetime.now().replace(microsecond=0)
+        #     pos.daily_sale_start = datetime.datetime.now().replace(microsecond=0)
+        #     pos.save()
         return render(request, 'adminpage.html', )
 
 def signup(request):
