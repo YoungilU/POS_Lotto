@@ -45,11 +45,11 @@
                 <div class="col-md-8 card padding-y-sm card ">
                     <ul class="nav bg radius nav-pills nav-fill mb-3 bg" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active show" data-toggle="pill" href="{% url 'POSApp:index' %}">
+                            <a class="nav-link" href="{% url 'POSApp:index' %}">
                                 <i class="fa fa-tags"></i> 판매</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'POSApp:refund' %}">
+                            <a class="nav-link active show" data-toggle="pill" href="{% url 'POSApp:refund' %}">
                                 <i class="fa fa-tags "></i> 환불</a>
                         </li>
                         <li class="nav-item">
@@ -61,92 +61,63 @@
                                 <i class="fa fa-tags "></i> Admin</a>
                         </li>
                     </ul>
-                    <h2 class="sale_title">판매</h2>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:sale_select('pension_lottery_1000', 1000)"
-                                    class="pension_lottery_1000">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">연금 1000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:sale_select('pension_lottery_5000', 5000)"
-                                    class="pension_lottery_5000">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">연금 5000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:sale_select('instant_lottery_1000', 1000)"
-                                    class="instant_lottery_1000">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">즉석 1000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:sale_select('instant_lottery_2000', 2000)"
-                                    class="instant_lottery_2000">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">즉석 2000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                    </div> <!-- row.// -->
-                    <hr>
-                    <h2 class="sale_title">지급</h2>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:pay_select(-1000)"
-                                    class="pension_lottery_1000_pay">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">1000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:pay_select(-2000)"
-                                    class="pension_lottery_5000_pay">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">2000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:pay_select(-5000)"
-                                    class="instant_lottery_1000_pay">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">5000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
-                                <a href="javascript:pay_select(-10000)"
-                                    class="instant_lottery_2000_pay">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">10000</h2>
-                                    </div>
-                                </a>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
+                    <div class="row" style="overflow:scroll; height:530px;">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">연금 1000: {{pension_lottery_1000}}EA</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">연금 5000: {{pension_lottery_5000}}EA</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">즉석 1000: {{instant_lottery_1000}}EA</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">즉석 2000: {{instant_lottery_2000}}EA</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">판매 총액: {{daily_sale}}￦</div>
+                                </div>
+                            </li>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">지급 총액: {{daily_pay}}￦</div>
+                                </div>
+                            </li>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">판매 + 지급 합계: {{sale_plus_pay}}￦</div>
+                                </div>
+                            </li>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">기본 시재금: {{base_balance}}￦</div>
+                                </div>
+                            </li>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">금고 보관금액: {{daily_balance}}￦</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">영업 시작일: {{daily_sale_start}}</div>
+                                </div>
+                            </li>
+                        </ol>
                     </div> <!-- row.// -->
                 </div>
                 <div class="col-md-4">

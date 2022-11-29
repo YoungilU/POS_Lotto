@@ -165,3 +165,5 @@ def logout(request):
         auth.logout(request)
     return redirect("POSApp:index")
 
+def refund(request):
+    return render(request, 'refund.html')
