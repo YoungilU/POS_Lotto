@@ -39,6 +39,9 @@ def index(request):
         # 기본 시제금
         pos.base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
 
+        # 재고 수정은 false
+        pos.ismodify = False
+
         pos.save()
     return render(request, "index.html")
 
@@ -74,9 +77,9 @@ def stock(request):
     return render(request, "stock.html", context)
 
 def adminpage(request):
+    # 0jun@chlrh / 0junWkd
     if request.method == "POST":
         if request.POST.get('pension_lottery_1000'):
-            print("1",request.POST.get('pension_lottery_1000'))
             pos = POSDB()
             pos.pension_lottery_1000 = int(request.POST.get('pension_lottery_1000'))
             pos.pension_lottery_5000 = int(request.POST.get('pension_lottery_5000'))
@@ -87,6 +90,7 @@ def adminpage(request):
             pos.daily_sale_start = datetime.datetime.now().replace(microsecond=0)
             pos.pay = 0
             pos.sale = 0
+            pos.ismodify = True
             pos.save()
             return render(request, 'adminpage.html')
         elif request.POST.get('useremail'):

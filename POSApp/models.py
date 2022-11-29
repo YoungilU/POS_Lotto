@@ -12,3 +12,4 @@ class POSDB(models.Model):
     sale_time = models.DateTimeField(null=True)
     daily_sale_start = models.DateTimeField(null=True)
     base_balance = models.IntegerField(null=True)
+    ismodify = models.BooleanField(null=True)
