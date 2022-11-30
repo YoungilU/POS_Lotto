@@ -1,4 +1,6 @@
 import datetime
+
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from POSApp.models import POSDB
 from django.contrib.auth.models import User
@@ -166,4 +168,11 @@ def logout(request):
     return redirect("POSApp:index")
 
 def refund(request):
-    return render(request, 'refund.html')
+    sale_pay_lists = POSDB.objects.order_by('-seq')
+    paginator = Paginator(sale_pay_lists, 100)
+    page = request.GET.get('page', 1)  # 페이지
+    page_obj = paginator.get_page(page)
+    context = {
+        'sale_pay_list': page_obj,
+    }
+    return render(request, 'refund.html', context)

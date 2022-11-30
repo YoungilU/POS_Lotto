@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
-<html lang="ko">
+<html lang="en">
 {% load static %}
+<!--TODO: 재고탭 판매품목 재고(4개), 오늘 판매금액, 오늘 지급금액, 총 합계, 기본 영업잔고, 금고 보관금액 -->
+<!--TODO: 오늘 판매금액 + 오늘 지급금액 = 총 합계, 기본 영업잔고, 금고 보관금액(총 합계 + 기본 영업잔고) -->
+<!--TODO: 기준이 되는 날짜와 시간은? 기본 시제금 10만원-->
 
 <head>
     <meta charset="utf-8">
@@ -33,6 +36,95 @@
         .btn-error {
             color: #ef5f5f;
         }
+
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  background: #2b2b2b;
+}
+@media screen and (max-width: 580px) {
+  body {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.table_refund {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table_refund {
+    display: block;
+  }
+}
+
+.row_table {
+  display: table-row;
+  background: #f6f6f6;
+}
+.row_table:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row_table.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.row_table.green {
+  background: #27ae60;
+}
+.row_table.blue {
+  background: #2980b9;
+}
+@media screen and (max-width: 580px) {
+  .row_table {
+    padding: 14px 0 7px;
+    display: block;
+  }
+  .row_table.header {
+    padding: 0;
+    height: 6px;
+  }
+  .row_table.header .cell {
+    display: none;
+  }
+  .row_table .cell {
+    margin-bottom: 10px;
+  }
+  .row_table .cell:before {
+    margin-bottom: 3px;
+    content: attr(data-title);
+    min-width: 98px;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #969696;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 16px;
+    display: block;
+  }
+}
     </style>
     <!-- custom style -->
 </head>
@@ -61,80 +153,46 @@
                                 <i class="fa fa-tags "></i> Admin</a>
                         </li>
                     </ul>
-                    <div class="row" style="overflow:scroll; height:530px;">
-                        <ol class="list-group list-group-numbered">
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">연금 1000: {{pension_lottery_1000}}EA</div>
+
+                    <div class="wrapper" style="overflow:scroll; height:530px;">
+                        <div class="table_refund">
+                            <div class="row_table header">
+                                <div class="cell">날짜</div>
+                                <div class="cell">연금 1000</div>
+                                <div class="cell">연금 5000</div>
+                                <div class="cell">즉석 1000</div>
+                                <div class="cell">즉석 2000</div>
+                                <div class="cell">지급 금액</div>
+                            </div>
+
+                                {% for sale_pay in sale_pay_list %}
+                                <div class="row_table">
+                                    <div class="cell" data-title="판매시간">{{sale_pay.sale_time}}</div>
+                                    <div class="cell" data-title="연금 1000">{{sale_pay.pension_lottery_1000}}</div>
+                                    <div class="cell" data-title="연금 2000">{{sale_pay.pension_lottery_5000}}</div>
+                                    <div class="cell" data-title="즉석 1000">{{sale_pay.instant_lottery_1000}}</div>
+                                    <div class="cell" data-title="즉석 2000">{{sale_pay.instant_lottery_2000}}</div>
+                                    <div class="cell" data-title="지급 금액">{{sale_pay.pay}}</div>
                                 </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">연금 5000: {{pension_lottery_5000}}EA</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">즉석 1000: {{instant_lottery_1000}}EA</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">즉석 2000: {{instant_lottery_2000}}EA</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">판매 총액: {{daily_sale}}￦</div>
-                                </div>
-                            </li>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">지급 총액: {{daily_pay}}￦</div>
-                                </div>
-                            </li>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">판매 + 지급 합계: {{sale_plus_pay}}￦</div>
-                                </div>
-                            </li>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">기본 시재금: {{base_balance}}￦</div>
-                                </div>
-                            </li>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">금고 보관금액: {{daily_balance}}￦</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">영업 시작일: {{daily_sale_start}}</div>
-                                </div>
-                            </li>
-                        </ol>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div> <!-- row.// -->
-                </div>
                 <div class="col-md-4">
                     <div class="card">
                         <span id="cart">
                             <form action="{% url 'POSApp:index' %}" method="POST">
                                 {% csrf_token %}
-                            <table class="table table-hover shopping-cart-wrap">
-                                <thead class="text-muted">
-                                    <tr>
-                                        <th scope="col">Item</th>
-                                        <th scope="col" width="120">Qty</th>
-                                        <th scope="col" width="120">Price</th>
-                                        <th scope="col" class="text-right" width="200">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                <table class="table table-hover shopping-cart-wrap">
+                                    <thead class="text-muted">
+                                        <tr>
+                                            <th scope="col">Item</th>
+                                            <th scope="col" width="120">Qty</th>
+                                            <th scope="col" width="120">Price</th>
+                                            <th scope="col" class="text-right" width="200">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr class="pension_lottery_1000_list" style="display:none;">
                                             <td class="list_text">
                                                 <figure class="media">
@@ -153,7 +211,8 @@
                                                     </button>
                                                     <button type="button"
                                                         class="m-btn btn btn-default pension_lottery_1000_Qty">0</button>
-                                                    <input type="text" class="pension_lottery_1000_Qty" name="pension_lottery_1000_Qty" value="0" style="display:none;">
+                                                    <input type="text" class="pension_lottery_1000_Qty"
+                                                        name="pension_lottery_1000_Qty" value="0" style="display:none;">
                                                     <button type="button" class="m-btn btn btn-default"
                                                         onclick="qty_button('pension_lottery_1000', false, 'right', 1000)">
                                                         <i class="fa fa-plus"></i>
@@ -163,7 +222,9 @@
                                             <td>
                                                 <div class="price-wrap">
                                                     <var class="pension_lottery_1000_price price">0</var>
-                                                    <input type="text" class="pension_lottery_1000_price" name="pension_lottery_1000_price" value="0" style="display:none;">
+                                                    <input type="text" class="pension_lottery_1000_price"
+                                                        name="pension_lottery_1000_price" value="0"
+                                                        style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
                                             <td class="text-right">
@@ -189,7 +250,8 @@
                                                     </button>
                                                     <button type="button"
                                                         class="m-btn btn btn-default pension_lottery_5000_Qty">0</button>
-                                                    <input type="text" class="pension_lottery_5000_Qty" name="pension_lottery_5000_Qty" value="0" style="display:none;">
+                                                    <input type="text" class="pension_lottery_5000_Qty"
+                                                        name="pension_lottery_5000_Qty" value="0" style="display:none;">
                                                     <button type="button" class="m-btn btn btn-default"
                                                         onclick="qty_button('pension_lottery_5000', false, 'right', 5000)">
                                                         <i class="fa fa-plus"></i>
@@ -199,7 +261,9 @@
                                             <td>
                                                 <div class="price-wrap">
                                                     <var class="pension_lottery_5000_price price">0</var>
-                                                    <input type="text" class="pension_lottery_5000_price" name="pension_lottery_5000_price" value="0" style="display:none;">
+                                                    <input type="text" class="pension_lottery_5000_price"
+                                                        name="pension_lottery_5000_price" value="0"
+                                                        style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
                                             <td class="text-right">
@@ -225,7 +289,8 @@
                                                     </button>
                                                     <button type="button"
                                                         class="m-btn btn btn-default instant_lottery_1000_Qty">0</button>
-                                                    <input type="text" class="instant_lottery_1000_Qty" name="instant_lottery_1000_Qty" value="0" style="display:none;">
+                                                    <input type="text" class="instant_lottery_1000_Qty"
+                                                        name="instant_lottery_1000_Qty" value="0" style="display:none;">
                                                     <button type="button" class="m-btn btn btn-default"
                                                         onclick="qty_button('instant_lottery_1000', false, 'right', 1000)">
                                                         <i class="fa fa-plus"></i>
@@ -235,7 +300,9 @@
                                             <td>
                                                 <div class="price-wrap">
                                                     <var class="instant_lottery_1000_price price">0</var>
-                                                    <input type="text" class="instant_lottery_1000_price" name="instant_lottery_1000_price" value="0" style="display:none;">
+                                                    <input type="text" class="instant_lottery_1000_price"
+                                                        name="instant_lottery_1000_price" value="0"
+                                                        style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
                                             <td class="text-right">
@@ -261,7 +328,8 @@
                                                     </button>
                                                     <button type="button"
                                                         class="m-btn btn btn-default instant_lottery_2000_Qty">0</button>
-                                                    <input type="text" class="instant_lottery_2000_Qty" name="instant_lottery_2000_Qty" value="0" style="display:none;">
+                                                    <input type="text" class="instant_lottery_2000_Qty"
+                                                        name="instant_lottery_2000_Qty" value="0" style="display:none;">
                                                     <button type="button" class="m-btn btn btn-default"
                                                         onclick="qty_button('instant_lottery_2000', false, 'right', 2000)">
                                                         <i class="fa fa-plus"></i>
@@ -271,7 +339,9 @@
                                             <td>
                                                 <div class="price-wrap">
                                                     <var class="instant_lottery_2000_price price">0</var>
-                                                    <input type="text" class="instant_lottery_2000_price" name="instant_lottery_2000_price" value="0" style="display:none;">
+                                                    <input type="text" class="instant_lottery_2000_price"
+                                                        name="instant_lottery_2000_price" value="0"
+                                                        style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
                                             <td class="text-right">
@@ -292,7 +362,8 @@
                                             <td>
                                                 <div class="price-wrap">
                                                     <var class="pay_price price">0</var>
-                                                    <input type="text" class="pay_price" name="pay_price" value="0" style="display:none;">
+                                                    <input type="text" class="pay_price" name="pay_price" value="0"
+                                                        style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
                                             <td class="text-right">
@@ -301,8 +372,8 @@
                                             </td>
                                         </tr>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
                                 <button type="submit" id="confirm" style="display:none;">제출</button>
                             </form>
                         </span>
@@ -380,7 +451,7 @@
             selectedTotal += price;
             document.getElementsByClassName('total')[0].innerHTML = selectedTotal;
         }
-        function pay_select(price){
+        function pay_select(price) {
             // 우측 리스트에 소환
             document.getElementsByClassName('pension_lottery_1000_pay_list')[0].style.cssText = 'display:visible;';
 
@@ -423,7 +494,7 @@
             document.getElementsByClassName('total')[0].innerHTML = selectedTotal;
         }
 
-        function confirm(){
+        function confirm() {
             document.getElementById('confirm').click();
         }
         //TODO: 84778477
