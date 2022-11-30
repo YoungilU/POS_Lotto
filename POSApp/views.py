@@ -24,6 +24,12 @@ def index(request):
         pos.instant_lottery_1000 = curr_instant_lottery_1000
         pos.instant_lottery_2000 = curr_instant_lottery_2000
 
+        # 판매 수량
+        pos.pension_lottery_1000_Qty = int(request.POST.get('pension_lottery_1000_Qty'))
+        pos.pension_lottery_5000_Qty = int(request.POST.get('pension_lottery_5000_Qty'))
+        pos.instant_lottery_1000_Qty = int(request.POST.get('instant_lottery_1000_Qty'))
+        pos.instant_lottery_2000_Qty = int(request.POST.get('instant_lottery_2000_Qty'))
+
         # 판매금액
         sale = int(request.POST.get('pension_lottery_1000_Qty'))*1000 + int(request.POST.get('pension_lottery_5000_Qty'))*5000 + int(request.POST.get('instant_lottery_1000_Qty'))*1000 + int(request.POST.get('instant_lottery_2000_Qty'))*2000
         pos.sale = sale
@@ -168,6 +174,8 @@ def logout(request):
     return redirect("POSApp:index")
 
 def refund(request):
+    if request.method == 'POST':
+        print(request.POST.get('refund_seq'))
     sale_pay_lists = POSDB.objects.order_by('-seq')
     paginator = Paginator(sale_pay_lists, 100)
     page = request.GET.get('page', 1)  # 페이지
