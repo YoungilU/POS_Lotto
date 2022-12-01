@@ -127,7 +127,11 @@ body {
 }
 .btn-primary_refund{
     background-color: #fc2348;
-    color: #ffffff
+    color: #ffffff;
+}
+.page-link{
+    color: #6d3b92;
+    font-weight: bold;
 }
     </style>
     <!-- custom style -->
@@ -189,10 +193,58 @@ body {
                                 </div>
                                 {% endfor %}
                                 <input type="text" id="refund_id" name="refund_seq" value="" style="display:none;">
-                                <button type="submit" id="submit_refund">제출</button>
+                                <button type="submit" id="submit_refund" style="display:none;">제출</button>
                             </div>
                         </div>
                         </form>
+                    <br>
+                    <div class="pagination_">
+                        <ul class="pagination justify-content-center">
+                            <!-- 첫 페이지 -->
+                            <li class="page-first">
+                            <a class="page-link" href="?{{current_path}}&page=1"><<</a>
+                            </li>
+                            <!-- 이전 페이지 -->
+                            {% if sale_pay_list.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{sale_pay_list.previous_page_number}}"><</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><</a>
+                            </li>
+                            {% endif %}
+                            <!-- 페이지 리스트 -->
+                            {% for page_number in sale_pay_list.paginator.page_range %}
+                            {% if page_number >= sale_pay_list.number|add:-3 and page_number <= sale_pay_list.number|add:3 %}
+                                {% if page_number == sale_pay_list.number %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page={{page_number}}"style="background:#6d3b92;font-weight: bold;">{{page_number}}</a>
+                                <li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{page_number}}">{{page_number}}</a>
+                                </li>
+                                {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 다음 페이지 -->
+                            {% if sale_pay_list.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{sale_pay_list.next_page_number}}">></a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">></a>
+                            </li>
+                            {% endif %}
+                            <!-- 마지막 페이지 -->
+                            <li class="page-first">
+                                <a class="page-link" href="?page={{sale_pay_list.paginator.num_pages}}">>></a>
+                            </li>
+                        </ul>
+                        <!-- 페이징 처리 끝 -->
+                    </div>
                     </div> <!-- row.// -->
                 <div class="col-md-4">
                     <div class="card">

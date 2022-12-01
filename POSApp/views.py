@@ -177,7 +177,7 @@ def refund(request):
     if request.method == 'POST':
         print(request.POST.get('refund_seq'))
     sale_pay_lists = POSDB.objects.order_by('-seq')
-    paginator = Paginator(sale_pay_lists, 100)
+    paginator = Paginator(sale_pay_lists, 20)
     page = request.GET.get('page', 1)  # 페이지
     page_obj = paginator.get_page(page)
     context = {
