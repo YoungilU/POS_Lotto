@@ -196,9 +196,13 @@ body {
                                     <div class="cell" data-title="즉석 2000">{{sale_pay.instant_lottery_2000_Qty}}</div>
                                     <div class="cell" data-title="지급 금액">{{sale_pay.pay}}</div>
                                     <div class="cell" data-title="환불">
+                                        {% if sale_pay.category == "환불" %}
+                                        {% elif sale_pay.category == "재고수정"%}
+                                        {% else %}
                                         <button class="btn btn-primary_refund btn-lg btn-block" onclick="refund({{forloop.counter0}})">
                                             환불
                                         </button>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 {% endfor %}
