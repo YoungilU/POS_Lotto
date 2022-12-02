@@ -139,17 +139,6 @@ def adminpage(request):
             else:
                 return render(request, 'adminpage.html', {'error': '※ 사용자 아이디 또는 패스워드가 틀립니다.'})
     else:
-
-        # if request.method == "POST":
-        #     pos = POSDB()
-        #     pos.pension_lottery_1000 = int(request.GET.get('pension_lottery_1000'))
-        #     pos.pension_lottery_5000 = int(request.GET.get('pension_lottery_5000'))
-        #     pos.instant_lottery_1000 = int(request.GET.get('instant_lottery_1000'))
-        #     pos.instant_lottery_2000 = int(request.GET.get('instant_lottery_2000'))
-        #     pos.base_balance = int(request.GET.get('base_balance'))
-        #     pos.sale_time = datetime.datetime.now().replace(microsecond=0)
-        #     pos.daily_sale_start = datetime.datetime.now().replace(microsecond=0)
-        #     pos.save()
         return render(request, 'adminpage.html', )
 
 def signup(request):
@@ -182,6 +171,8 @@ def logout(request):
 def refund(request):
     if request.method == 'POST':
         print(request.POST.get('refund_seq'))
+        refund_seq = POSDB.objects.filter(seq=request.POST.get('refund_seq'))
+        print(refund_seq.all().values()[0]['category'])
     sale_pay_lists = POSDB.objects.order_by('-seq')
     paginator = Paginator(sale_pay_lists, 20)
     page = request.GET.get('page', 1)  # 페이지

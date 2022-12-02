@@ -167,6 +167,7 @@ body {
                         <div class="table_refund">
                             <div class="row_table header">
                                 <div class="cell">seq</div>
+                                <div class="cell">구분</div>
                                 <div class="cell">날짜</div>
                                 <div class="cell">연금 1000</div>
                                 <div class="cell">연금 5000</div>
@@ -179,6 +180,7 @@ body {
                                 {% for sale_pay in sale_pay_list %}
                                 <div class="row_table">
                                     <div class="cell cell_seq" data-title="seq">{{sale_pay.seq}}</div>
+                                    <div class="cell" data-title="판매시간">{{sale_pay.category}}</div>
                                     <div class="cell" data-title="판매시간">{{sale_pay.sale_time}}</div>
                                     <div class="cell" data-title="연금 1000">{{sale_pay.pension_lottery_1000_Qty}}</div>
                                     <div class="cell" data-title="연금 2000">{{sale_pay.pension_lottery_5000_Qty}}</div>
