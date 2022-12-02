@@ -105,6 +105,10 @@ def adminpage(request):
             pos.pay = 0
             pos.sale = 0
             pos.ismodify = True
+            pos.pension_lottery_1000_Qty = 0
+            pos.pension_lottery_5000_Qty = 0
+            pos.instant_lottery_1000_Qty = 0
+            pos.instant_lottery_2000_Qty = 0
             pos.category = "재고수정"
             pos.save()
             return render(request, 'adminpage.html')
@@ -212,6 +216,7 @@ def refund(request):
         pos.instant_lottery_2000_Qty = instant_lottery_2000_Qty
         pos.category = category
         pos.save()
+
 
     sale_pay_lists = POSDB.objects.order_by('-seq')
     paginator = Paginator(sale_pay_lists, 20)
