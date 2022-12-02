@@ -50,6 +50,12 @@ def index(request):
         # 재고 수정은 false
         pos.ismodify = False
 
+        # category
+        if sale>0 and pay<0: pos.category = "판매/지급"
+        elif sale > 0: pos.category = "판매"
+        elif pay < 0: pos.category = "지급"
+
+
         pos.save()
     return render(request, "index.html")
 

@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class POSDB(models.Model):
     seq = models.IntegerField(primary_key=True)
+    category = models.CharField(max_length=10, null=True)
     pension_lottery_1000 = models.IntegerField(null=True)
     pension_lottery_5000 = models.IntegerField(null=True)
     instant_lottery_1000 = models.IntegerField(null=True)
