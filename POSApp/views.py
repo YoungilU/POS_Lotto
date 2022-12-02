@@ -105,6 +105,7 @@ def adminpage(request):
             pos.pay = 0
             pos.sale = 0
             pos.ismodify = True
+            pos.category = "재고수정"
             pos.save()
             return render(request, 'adminpage.html')
         elif request.POST.get('useremail'):
@@ -170,13 +171,54 @@ def logout(request):
 
 def refund(request):
     if request.method == 'POST':
-        print(request.POST.get('refund_seq'))
         refund_seq = POSDB.objects.filter(seq=request.POST.get('refund_seq'))
-        print(refund_seq.all().values()[0]['category'])
+
+        prev_pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
+        prev_pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
+        prev_instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
+        prev_instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+        pension_lottery_1000 = prev_pension_lottery_1000 + refund_seq.all().values()[0]['pension_lottery_1000_Qty']
+        pension_lottery_5000 = prev_pension_lottery_5000 + refund_seq.all().values()[0]['pension_lottery_5000_Qty']
+        instant_lottery_1000 = prev_instant_lottery_1000 + refund_seq.all().values()[0]['instant_lottery_1000_Qty']
+        instant_lottery_2000 = prev_instant_lottery_2000 + refund_seq.all().values()[0]['instant_lottery_2000_Qty']
+        sale_time = datetime.datetime.now().replace(microsecond=0)
+        pay = -refund_seq.all().values()[0]['pay']
+        sale = -refund_seq.all().values()[0]['sale']
+        daily_sale_start = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']
+        base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
+        ismodify = False
+        pension_lottery_1000_Qty = -refund_seq.all().values()[0]['pension_lottery_1000_Qty']
+        pension_lottery_5000_Qty = -refund_seq.all().values()[0]['pension_lottery_5000_Qty']
+        instant_lottery_1000_Qty = -refund_seq.all().values()[0]['instant_lottery_1000_Qty']
+        instant_lottery_2000_Qty = -refund_seq.all().values()[0]['instant_lottery_2000_Qty']
+        category = "환불"
+
+        refund_seq.delete()
+
+        pos = POSDB()
+        pos.pension_lottery_1000 = pension_lottery_1000
+        pos.pension_lottery_5000 = pension_lottery_5000
+        pos.instant_lottery_1000 = instant_lottery_1000
+        pos.instant_lottery_2000 = instant_lottery_2000
+        pos.sale_time = sale_time
+        pos.pay = pay
+        pos.sale = sale
+        pos.daily_sale_start = daily_sale_start
+        pos.base_balance = base_balance
+        pos.ismodify = ismodify
+        pos.pension_lottery_1000_Qty = pension_lottery_1000_Qty
+        pos.pension_lottery_5000_Qty = pension_lottery_5000_Qty
+        pos.instant_lottery_1000_Qty = instant_lottery_1000_Qty
+        pos.instant_lottery_2000_Qty = instant_lottery_2000_Qty
+        pos.category = category
+        pos.save()
+
     sale_pay_lists = POSDB.objects.order_by('-seq')
     paginator = Paginator(sale_pay_lists, 20)
     page = request.GET.get('page', 1)  # 페이지
     page_obj = paginator.get_page(page)
+
+
     context = {
         'sale_pay_list': page_obj,
     }
