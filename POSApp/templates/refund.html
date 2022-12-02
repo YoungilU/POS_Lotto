@@ -52,7 +52,7 @@ body {
 
 .wrapper {
   margin: 0 auto;
-  padding: 40px;
+  padding: 10px;
   max-width: 800px;
 }
 
@@ -571,6 +571,8 @@ body {
         function refund(seq) {
             document.getElementById('refund_id').value = parseInt(document.getElementsByClassName('cell_seq')[seq].innerHTML);
             document.getElementById('submit_refund').click();
+            d
+            document.getElementsByClassName('btn-primary_refund')[seq].innerHTML = "완료"
         }
     </script>
 </body>
