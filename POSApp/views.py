@@ -10,6 +10,8 @@ from django.contrib import auth
 def index(request):
     if request.method == "POST":
         pos = POSDB()
+        if int(request.POST.get('pension_lottery_1000_Qty')) == 0 and int(request.POST.get('pay_price')) == 0:
+            return render(request, "index.html")
         # 이전 개수 - 현재 개수 DB에 저장
         prev_pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
         prev_pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
