@@ -78,8 +78,10 @@
                                     class="pension_lottery_1000">
                                     <div class="img-wrap">
                                         <h2 class="card_title">연금 1000</h2>
+
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">1000￦ ({{pension_lottery_1000}})</div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -90,6 +92,7 @@
                                         <h2 class="card_title">연금 5000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">5000￦ ({{pension_lottery_5000}})</div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -100,6 +103,7 @@
                                         <h2 class="card_title">즉석 1000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">1000￦ ({{instant_lottery_1000}})</div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -110,6 +114,7 @@
                                         <h2 class="card_title">즉석 2000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">2000￦ ({{instant_lottery_2000}})</div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                     </div> <!-- row.// -->
@@ -124,6 +129,7 @@
                                         <h2 class="card_title">1000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">-1000￦ </div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -134,6 +140,7 @@
                                         <h2 class="card_title">2000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">-2000￦ </div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -144,6 +151,7 @@
                                         <h2 class="card_title">5000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">-5000￦ </div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                         <div class="col-md-3">
@@ -154,6 +162,7 @@
                                         <h2 class="card_title">10000</h2>
                                     </div>
                                 </a>
+                                <div class="index_lottery_qty">-10000￦ </div>
                             </figure> <!-- card // -->
                         </div> <!-- col // -->
                     </div> <!-- row.// -->
@@ -169,7 +178,6 @@
                                         <th scope="col">Item</th>
                                         <th scope="col" width="120">Qty</th>
                                         <th scope="col" width="120">Price</th>
-                                        <th scope="col" class="text-right" width="200">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -204,10 +212,6 @@
                                                     <input type="text" class="pension_lottery_1000_price" name="pension_lottery_1000_price" value="0" style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
-                                            <td class="text-right">
-                                                <a href="#" class="btn btn-outline-danger"> <i
-                                                        class="fa fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                         <tr class="pension_lottery_5000_list" style="display:none;">
                                             <td class="list_text">
@@ -239,10 +243,6 @@
                                                     <var class="pension_lottery_5000_price price">0</var>
                                                     <input type="text" class="pension_lottery_5000_price" name="pension_lottery_5000_price" value="0" style="display:none;">
                                                 </div> <!-- price-wrap .// -->
-                                            </td>
-                                            <td class="text-right">
-                                                <a href="" class="btn btn-outline-danger"> <i
-                                                        class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <tr class="instant_lottery_1000_list" style="display:none;">
@@ -276,10 +276,6 @@
                                                     <input type="text" class="instant_lottery_1000_price" name="instant_lottery_1000_price" value="0" style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
-                                            <td class="text-right">
-                                                <a href="" class="btn btn-outline-danger btn-round"> <i
-                                                        class="fa fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                         <tr class="instant_lottery_2000_list" style="display:none;">
                                             <td class="list_text">
@@ -312,10 +308,6 @@
                                                     <input type="text" class="instant_lottery_2000_price" name="instant_lottery_2000_price" value="0" style="display:none;">
                                                 </div> <!-- price-wrap .// -->
                                             </td>
-                                            <td class="text-right">
-                                                <a href="" class="btn btn-outline-danger btn-round"> <i
-                                                        class="fa fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                         <tr class="pension_lottery_1000_pay_list" style="display:none;">
                                             <td class="list_text">
@@ -332,10 +324,6 @@
                                                     <var class="pay_price price">0</var>
                                                     <input type="text" class="pay_price" name="pay_price" value="0" style="display:none;">
                                                 </div> <!-- price-wrap .// -->
-                                            </td>
-                                            <td class="text-right">
-                                                <a href="" class="btn btn-outline-danger btn-round"> <i
-                                                        class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -464,7 +452,7 @@
         function confirm(){
             document.getElementById('confirm').click();
         }
-        //TODO: 84778477
+        // TODO: delete()
     </script>
 </body>
 

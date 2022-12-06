@@ -55,9 +55,20 @@ def index(request):
         elif sale > 0: pos.category = "판매"
         elif pay < 0: pos.category = "지급"
 
-
         pos.save()
-    return render(request, "index.html")
+        return render(request, "index.html")
+
+    pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
+    pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
+    instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
+    instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+    context = {
+        'pension_lottery_1000': pension_lottery_1000,
+        'pension_lottery_5000': pension_lottery_5000,
+        'instant_lottery_1000': instant_lottery_1000,
+        'instant_lottery_2000': instant_lottery_2000
+    }
+    return render(request, "index.html", context)
 
 def stock(request):
     pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']

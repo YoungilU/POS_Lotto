@@ -1914,7 +1914,7 @@ ul.row, ul.row-sm {
     border-radius: 0.2rem 0.2rem 0 0;
     overflow: hidden;
     position: relative;
-    height: 130px;
+    height: 100px;
     text-align: center; }
     .card-product .img-wrap img {
       max-height: 100%;
@@ -2257,7 +2257,13 @@ ul.row, ul.row-sm {
   margin-bottom: 20px;
 }
 .card_title{
-  line-height:130px;
+  line-height:100px;
+}
+.index_lottery_qty{
+  text-align:center;
+  color:#585858;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 3px 0px;
 }
 td.list_text{
   vertical-align:middle;
@@ -2282,10 +2288,10 @@ body > section > div > div > div.col-md-8.card.padding-y-sm.card > div > ol > li
     text-align: center;
 }
 .col-md-8{
-    flex: 0 0 65%;
-    max-width: 65%;
+    flex: 0 0 67.5%;
+    max-width: 67.5%;
 }
 .col-md-4{
-    flex: 0 0 35%;
-    max-width: 35%;
+    flex: 0 0 32.5%;
+    max-width: 32.5%;
 }
