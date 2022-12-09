@@ -10,8 +10,24 @@ from django.contrib import auth
 def index(request):
     if request.method == "POST":
         pos = POSDB()
-        if int(request.POST.get('pension_lottery_1000_Qty')) == 0 and int(request.POST.get('pay_price')) == 0:
-            return render(request, "index.html")
+
+        # 아무 입력 없이 확인만 눌렀을 경우
+        if int(request.POST.get('pension_lottery_1000_Qty')) == 0 and int(request.POST.get('pension_lottery_5000_Qty')) == 0 and \
+                int(request.POST.get('instant_lottery_1000_Qty')) == 0 and int(request.POST.get('instant_lottery_2000_Qty')) == 0 and \
+                int(request.POST.get('pay_price')) == 0:
+            pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
+            pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
+            instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
+            instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+            context = {
+                'pension_lottery_1000': pension_lottery_1000,
+                'pension_lottery_5000': pension_lottery_5000,
+                'instant_lottery_1000': instant_lottery_1000,
+                'instant_lottery_2000': instant_lottery_2000
+            }
+
+            return render(request, "index.html", context)
+
         # 이전 개수 - 현재 개수 DB에 저장
         prev_pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
         prev_pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
@@ -58,7 +74,18 @@ def index(request):
         elif pay < 0: pos.category = "지급"
 
         pos.save()
-        return render(request, "index.html")
+        pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
+        pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
+        instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
+        instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+        context = {
+            'pension_lottery_1000': pension_lottery_1000,
+            'pension_lottery_5000': pension_lottery_5000,
+            'instant_lottery_1000': instant_lottery_1000,
+            'instant_lottery_2000': instant_lottery_2000
+        }
+
+        return render(request, "index.html", context)
 
     pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
     pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
