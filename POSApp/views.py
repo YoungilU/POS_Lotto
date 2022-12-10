@@ -19,13 +19,23 @@ def index(request):
             pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
             instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
             instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+            daily_list = POSDB.objects.filter(daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1][
+                    'daily_sale_start']).values()
+            base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
+            daily_sale = 0
+            daily_pay = 0
+            for i in range(len(daily_list)):
+                daily_sale += daily_list[i]['sale']
+                daily_pay += daily_list[i]['pay']
+
             context = {
                 'pension_lottery_1000': pension_lottery_1000,
                 'pension_lottery_5000': pension_lottery_5000,
                 'instant_lottery_1000': instant_lottery_1000,
-                'instant_lottery_2000': instant_lottery_2000
+                'instant_lottery_2000': instant_lottery_2000,
+                'daily_balance': base_balance + daily_sale + daily_pay,
+                'daily_pay': daily_pay,
             }
-
             return render(request, "index.html", context)
 
         # 이전 개수 - 현재 개수 DB에 저장
@@ -78,24 +88,46 @@ def index(request):
         pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
         instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
         instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+
+        daily_list = POSDB.objects.filter(daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']).values()
+        base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
+        daily_sale = 0
+        daily_pay = 0
+        for i in range(len(daily_list)):
+            daily_sale += daily_list[i]['sale']
+            daily_pay += daily_list[i]['pay']
+
         context = {
             'pension_lottery_1000': pension_lottery_1000,
             'pension_lottery_5000': pension_lottery_5000,
             'instant_lottery_1000': instant_lottery_1000,
-            'instant_lottery_2000': instant_lottery_2000
+            'instant_lottery_2000': instant_lottery_2000,
+            'daily_balance': base_balance + daily_sale + daily_pay,
+            'daily_pay': daily_pay,
         }
-
         return render(request, "index.html", context)
 
     pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
     pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
     instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
     instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
+
+    daily_list = POSDB.objects.filter(
+        daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']).values()
+    base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
+    daily_sale = 0
+    daily_pay = 0
+    for i in range(len(daily_list)):
+        daily_sale += daily_list[i]['sale']
+        daily_pay += daily_list[i]['pay']
+
     context = {
         'pension_lottery_1000': pension_lottery_1000,
         'pension_lottery_5000': pension_lottery_5000,
         'instant_lottery_1000': instant_lottery_1000,
-        'instant_lottery_2000': instant_lottery_2000
+        'instant_lottery_2000': instant_lottery_2000,
+        'daily_balance': base_balance + daily_sale + daily_pay,
+        'daily_pay': daily_pay,
     }
     return render(request, "index.html", context)
 
