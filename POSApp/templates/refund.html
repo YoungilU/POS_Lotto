@@ -202,6 +202,9 @@ body {
                                     <div class="cell" data-title="환불">
                                         {% if sale_pay.category == "환불" %}
                                         {% elif sale_pay.category == "재고수정"%}
+                                        {% elif sale_pay.category == "판매(환불완료)"%}
+                                        {% elif sale_pay.category == "지급(환불완료)"%}
+                                        {% elif sale_pay.category == "판매/지급(환불완료)"%}
                                         {% else %}
                                         <button class="btn btn-primary_refund btn-lg btn-block" onclick="refund({{forloop.counter0}})">
                                             환불

@@ -248,6 +248,10 @@ def logout(request):
 def refund(request):
     if request.method == 'POST':
         refund_seq = POSDB.objects.filter(seq=request.POST.get('refund_seq'))
+        # 환불 선택 -> 카테고리 환불완료로 수정
+        selected = POSDB.objects.get(seq=refund_seq.all().values()[0]['seq'])
+        selected.category = selected.category + '(환불완료)'
+        selected.save()
 
         prev_pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
         prev_pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
@@ -269,7 +273,7 @@ def refund(request):
         instant_lottery_2000_Qty = -refund_seq.all().values()[0]['instant_lottery_2000_Qty']
         category = "환불"
 
-        refund_seq.delete()
+        # refund_seq.delete()
 
         pos = POSDB()
         pos.pension_lottery_1000 = pension_lottery_1000

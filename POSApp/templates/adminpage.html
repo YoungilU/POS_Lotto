@@ -170,7 +170,7 @@
                     </div> <!-- end of login -->
                     {% else %}
                     <h2 class="sale_title">재고수정</h2>
-                    <form action="{% url 'POSApp:adminpage' %}" method="POST" onsubmit="return false">
+                    <form action="{% url 'POSApp:adminpage' %}" method="POST">
                         {% csrf_token %}
                     <div class="row">
                         <div class="col-md-3">
@@ -564,7 +564,12 @@
         function confirm() {
             document.getElementById('confirm').click();
         }
-        //TODO: 84778477
+
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        }, true);
     </script>
 </body>
 
