@@ -2259,6 +2259,13 @@ ul.row, ul.row-sm {
 .card_title{
   line-height:100px;
 }
+.card_title_pay{
+  font-size:20px;
+}
+
+.card_title_sale{
+  color:#ef5f5f;
+}
 .index_lottery_qty{
   text-align:center;
   color:#585858;

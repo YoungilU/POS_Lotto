@@ -41,7 +41,9 @@
         body{
             font-family: "Pretended";
         }
-
+        .col-md-3{
+            flex:20%;
+        }
     </style>
     <!-- custom style -->
 </head>
@@ -74,22 +76,10 @@
                     <div class="row">
                         <div class="col-md-3">
                             <figure class="card card-product">
-                                <a href="javascript:sale_select('pension_lottery_1000', 1000)"
-                                    class="pension_lottery_1000">
-                                    <div class="img-wrap">
-                                        <h2 class="card_title">연금 1000</h2>
-
-                                    </div>
-                                </a>
-                                <div class="index_lottery_qty">1000￦ ({{pension_lottery_1000}})</div>
-                            </figure> <!-- card // -->
-                        </div> <!-- col // -->
-                        <div class="col-md-3">
-                            <figure class="card card-product">
                                 <a href="javascript:sale_select('pension_lottery_5000', 5000)"
                                     class="pension_lottery_5000">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">연금 5000</h2>
+                                        <h2 class="card_title card_title_pay">연금 5000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">5000￦ ({{pension_lottery_5000}})</div>
@@ -100,7 +90,7 @@
                                 <a href="javascript:sale_select('instant_lottery_1000', 1000)"
                                     class="instant_lottery_1000">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">즉석 1000</h2>
+                                        <h2 class="card_title card_title_pay">즉석 1000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">1000￦ ({{instant_lottery_1000}})</div>
@@ -111,7 +101,33 @@
                                 <a href="javascript:sale_select('instant_lottery_2000', 2000)"
                                     class="instant_lottery_2000">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">즉석 2000</h2>
+                                        <h2 class="card_title card_title_pay">즉석 2000</h2>
+                                    </div>
+                                </a>
+                                <div class="index_lottery_qty">2000￦ ({{instant_lottery_2000}})</div>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select_x10('instant_lottery_1000', 1000)"
+                                    class="instant_lottery_2000">
+                                    <div class="img-wrap">
+                                        <br>
+                                        <h2 class="card_title card_title_pay" style="line-height:normal;">즉석 1000</h2>
+                                        <h2 class="card_title card_title_pay" style="line-height:normal;">( X10 )</h2>
+                                    </div>
+                                </a>
+                                <div class="index_lottery_qty">2000￦ ({{instant_lottery_2000}})</div>
+                            </figure> <!-- card // -->
+                        </div> <!-- col // -->
+                        <div class="col-md-3">
+                            <figure class="card card-product">
+                                <a href="javascript:sale_select_x10('instant_lottery_2000', 2000)"
+                                    class="instant_lottery_2000">
+                                    <div class="img-wrap">
+                                        <br>
+                                        <h2 class="card_title card_title_pay" style="line-height:normal;">즉석 2000</h2>
+                                        <h2 class="card_title card_title_pay" style="line-height:normal;">( X10 )</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">2000￦ ({{instant_lottery_2000}})</div>
@@ -126,7 +142,7 @@
                                 <a href="javascript:pay_select(-1000)"
                                     class="pension_lottery_1000_pay">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">1000</h2>
+                                        <h2 class="card_title card_title_sale">1000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">-1000￦ </div>
@@ -137,7 +153,7 @@
                                 <a href="javascript:pay_select(-2000)"
                                     class="pension_lottery_5000_pay">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">2000</h2>
+                                        <h2 class="card_title card_title_sale">2000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">-2000￦ </div>
@@ -148,7 +164,7 @@
                                 <a href="javascript:pay_select(-5000)"
                                     class="instant_lottery_1000_pay">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">5000</h2>
+                                        <h2 class="card_title card_title_sale">5000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">-5000￦ </div>
@@ -159,7 +175,7 @@
                                 <a href="javascript:pay_select(-10000)"
                                     class="instant_lottery_2000_pay">
                                     <div class="img-wrap">
-                                        <h2 class="card_title">10000</h2>
+                                        <h2 class="card_title card_title_sale">10000</h2>
                                     </div>
                                 </a>
                                 <div class="index_lottery_qty">-10000￦ </div>
@@ -414,6 +430,28 @@
             selectedTotal += price;
             document.getElementsByClassName('total')[0].innerHTML = selectedTotal;
         }
+        function sale_select_x10(select, price) {
+            // 우측 리스트에 소환
+            document.getElementsByClassName(select + '_list')[0].style.cssText = 'display:visible;';
+
+            // 개수 추가
+            selectedQty = parseInt(document.getElementsByClassName(select + '_Qty')[0].innerHTML) + 10;
+            document.getElementsByClassName(select + '_Qty')[0].innerHTML = selectedQty;
+            document.getElementsByClassName(select + '_Qty')[1].value = String(selectedQty);
+
+            // 가격 추가
+            selectedPrice = parseInt(document.getElementsByClassName(select + '_price')[0].innerHTML) + price*10;
+            document.getElementsByClassName(select + '_price')[0].innerHTML = selectedPrice;
+            document.getElementsByClassName(select + '_price')[1].value = String(selectedPrice);
+
+            // 총액
+            let sale = parseInt(document.getElementsByClassName('total_sale')[0].innerHTML);
+            document.getElementsByClassName('total_sale')[0].innerHTML = sale + price*10;
+
+
+            selectedTotal += price*10;
+            document.getElementsByClassName('total')[0].innerHTML = selectedTotal;
+        }
         function pay_select(price){
             // 우측 리스트에 소환
             document.getElementsByClassName('pension_lottery_1000_pay_list')[0].style.cssText = 'display:visible;';
@@ -460,7 +498,7 @@
         function confirm(){
             document.getElementById('confirm').click();
         }
-        // TODO: delete()
+
     </script>
 </body>
 
