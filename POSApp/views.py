@@ -177,7 +177,7 @@ def stock(request):
         # 0000-00-00 형식의 리스트
         date = []
         for i in range(len(selected_df.sale_time.dt.date.unique())):
-            date.append(selected_df.sale_time.dt.date.unique()[i].strftime("%Y-%m-%d"))
+            date.append(selected_df.sale_time.dt.date.unique()[i].strftime("%Y-%m-%d %a"))
         selected_date = date
 
         context = {
@@ -188,6 +188,12 @@ def stock(request):
             'instant_lottery_1000_Qty': instant_lottery_1000_Qty,
             'instant_lottery_2000_Qty': instant_lottery_2000_Qty,
             'selected_date': selected_date,
+            'sale_list': sale_list,
+            'pay_list': pay_list,
+            'sale_plus_pay_list': sale_plus_pay_list,
+            'pension_lottery_5000_Qty_list': pension_lottery_5000_Qty_list,
+            'instant_lottery_1000_Qty_list': instant_lottery_1000_Qty_list,
+            'instant_lottery_2000_Qty_list': instant_lottery_2000_Qty_list,
         }
 
         return render(request, "stock.html", context)
