@@ -1,4 +1,6 @@
 import datetime
+import pandas as pd
+from datetime import datetime
 
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -132,38 +134,66 @@ def index(request):
     return render(request, "index.html", context)
 
 def stock(request):
-    pension_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_1000']
-    pension_lottery_5000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['pension_lottery_5000']
-    instant_lottery_1000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_1000']
-    instant_lottery_2000 = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['instant_lottery_2000']
-    # balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['balance']
+    if request.POST.get('daterange'):
+        # 선택 날짜 slicing
+        start_date = request.POST.get('daterange')[:request.POST.get('daterange').find(' -')]
+        start_date = start_date[6:10] + '-' + start_date[0:2] + '-' + start_date[3:5]
+        end_date = request.POST.get('daterange')[request.POST.get('daterange').find('- ')+2:]
+        end_date = end_date[6:10] + '-' + end_date[0:2] + '-' + end_date[3:5]
 
-    daily_list = POSDB.objects.filter(daily_sale_start=POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']).values()
+        # DB 데이터프레임으로
+        df = pd.DataFrame(POSDB.objects.all().values())
 
-    base_balance = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['base_balance']
-    daily_sale = 0
-    daily_pay = 0
-    for i in range(len(daily_list)):
-        daily_sale += daily_list[i]['sale']
-        daily_pay += daily_list[i]['pay']
+        # 날짜 형식: 0000-00-00
+        start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
 
-    daily_sale_start = POSDB.objects.all().values()[len(POSDB.objects.all()) - 1]['daily_sale_start']
-    context = {
-        'pension_lottery_1000': pension_lottery_1000,
-        'pension_lottery_5000': pension_lottery_5000,
-        'instant_lottery_1000': instant_lottery_1000,
-        'instant_lottery_2000': instant_lottery_2000,
-        'daily_sale': daily_sale,
-        'daily_pay': daily_pay,
-        'sale_plus_pay': daily_sale + daily_pay,
-        'base_balance': base_balance,
-        'daily_balance': base_balance + daily_sale + daily_pay,
-        'daily_sale_start': daily_sale_start,
-    }
-    return render(request, "stock.html", context)
+        # 선택된 날짜만 데이터프레임으로
+        selected_df = df[(df.sale_time.dt.date >= start_date) & (df.sale_time.dt.date <= end_date)]
+
+        # 0000-00-00 형식 날짜 컬럼 추가
+        selected_df['sale_time_ymd'] = selected_df['sale_time'].dt.date
+
+        # 날짜별 합계 계산
+        groupby_selected_df = selected_df.groupby('sale_time_ymd').sum()
+        groupby_selected_df['sale_plus_pay'] = groupby_selected_df['sale'] + groupby_selected_df['pay']
+
+        # 선택된 날짜별로 각각 리스트 생성
+        sale_list = groupby_selected_df.sale.to_list()
+        pay_list = groupby_selected_df.pay.to_list()
+        sale_plus_pay_list = groupby_selected_df.sale_plus_pay.to_list()
+        pension_lottery_5000_Qty_list = groupby_selected_df.pension_lottery_5000_Qty.to_list()
+        instant_lottery_1000_Qty_list = groupby_selected_df.instant_lottery_1000_Qty.to_list()
+        instant_lottery_2000_Qty_list = groupby_selected_df.instant_lottery_2000_Qty.to_list()
+
+        # 선택된 날짜별 합계
+        sale = selected_df.sale.sum()
+        pay = selected_df.pay.sum()
+        sale_plus_pay = sale + pay
+        pension_lottery_5000_Qty = selected_df.pension_lottery_5000_Qty.sum()
+        instant_lottery_1000_Qty = selected_df.instant_lottery_1000_Qty.sum()
+        instant_lottery_2000_Qty = selected_df.instant_lottery_2000_Qty.sum()
+
+        # 0000-00-00 형식의 리스트
+        date = []
+        for i in range(len(selected_df.sale_time.dt.date.unique())):
+            date.append(selected_df.sale_time.dt.date.unique()[i].strftime("%Y-%m-%d"))
+        selected_date = date
+
+        context = {
+            'sale': sale,
+            'pay': pay,
+            'sale_plus_pay': sale_plus_pay,
+            'pension_lottery_5000_Qty': pension_lottery_5000_Qty,
+            'instant_lottery_1000_Qty': instant_lottery_1000_Qty,
+            'instant_lottery_2000_Qty': instant_lottery_2000_Qty,
+            'selected_date': selected_date,
+        }
+
+        return render(request, "stock.html", context)
+    return render(request, "stock.html")
 
 def adminpage(request):
-    # 0jun@chlrh / 0junWkd
     if request.method == "POST":
         if request.POST.get('pension_lottery_1000'):
             pos = POSDB()
