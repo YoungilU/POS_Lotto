@@ -1,6 +1,5 @@
 import datetime
 import pandas as pd
-from datetime import datetime
 
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -145,8 +144,8 @@ def stock(request):
         df = pd.DataFrame(POSDB.objects.all().values())
 
         # 날짜 형식: 0000-00-00
-        start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
-        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+        start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
 
         # 선택된 날짜만 데이터프레임으로
         selected_df = df[(df.sale_time.dt.date >= start_date) & (df.sale_time.dt.date <= end_date)]
