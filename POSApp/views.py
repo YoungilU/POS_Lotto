@@ -1,6 +1,5 @@
 import datetime
 import pandas as pd
-from datetime import datetime
 
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -145,8 +144,8 @@ def stock(request):
         df = pd.DataFrame(POSDB.objects.all().values())
 
         # 날짜 형식: 0000-00-00
-        start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
-        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+        start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
 
         # 선택된 날짜만 데이터프레임으로
         selected_df = df[(df.sale_time.dt.date >= start_date) & (df.sale_time.dt.date <= end_date)]
@@ -219,6 +218,52 @@ def adminpage(request):
             pos.instant_lottery_2000_Qty = 0
             pos.category = "재고수정"
             pos.save()
+            return render(request, 'adminpage.html')
+        elif request.POST.get('delete_data'):   # 삭제 버튼을 눌렀을 때
+            # pos = POSDB.objects.get(seq=7180)
+            # print(pos.seq)
+            # pos.delete()
+            # pos.seq = 10000
+            # pos.save()
+            #### 프로세스 ####
+            # 한 달 이상 된 데이터는 csv로 따로 저장
+            # 한 달 이상 된 데이터 DB에서 삭제
+            # 한 달치의 데이터 seq 1부터 부여
+            # 저장 PATH 경로 재설정 필요
+            ################
+
+            # 한 달 이전 날짜
+            before_one_month = datetime.datetime.now().replace(microsecond=0) - datetime.timedelta(days=30)
+
+            # 현재 날짜로부터 한 달치 데이터
+            one_month_data = POSDB.objects.filter(sale_time__range=[before_one_month, datetime.datetime.now().replace(microsecond=0)]).values().all()
+
+            # 현재 날짜로부터 한 달 이상 지난 데이터
+            except_one_month_data = POSDB.objects.filter(sale_time__range=[datetime.datetime.now().replace(microsecond=0) - datetime.timedelta(days=30000),
+                                                                           before_one_month]).values().all()
+            except_one_month_data_df = pd.DataFrame(except_one_month_data)
+
+            # 삭제하는 데이터 csv로 저장
+            save_name1 = str(datetime.datetime.now().replace(microsecond=0))[:11].replace('-','_') # 저장명용 변수
+            save_name2 = str(datetime.datetime.now().replace(microsecond=0))[11:].replace(':','_')
+            save_name = save_name1 + '__' + save_name2
+            save_name = (save_name + '.csv').replace(' ', '') # 파일명 합칠 때 공백 제거
+            except_one_month_data_df.to_csv('D:\\' + save_name, encoding='utf-8-sig', index=False)
+
+            # 한 달 이상 된 데이터 DB에서 삭제
+            for row in except_one_month_data:
+                pos = POSDB.objects.get(seq=row['seq'])
+                pos.delete()
+
+            # 한 달치의 데이터 seq 1부터 부여
+            count_seq = 1
+            for row in one_month_data:
+                pos = POSDB.objects.get(seq=row['seq'])
+                pos.delete()
+                pos.seq = count_seq
+                count_seq += 1
+                pos.save()
+
             return render(request, 'adminpage.html')
         elif request.POST.get('useremail'):
             useremail = request.POST.get('useremail', None)

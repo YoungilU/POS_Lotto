@@ -103,7 +103,13 @@
         body{
         font-family: "Pretended";
         }
-
+        .delete{
+            background-color: red;
+            color:white;
+            font-size: 15px;
+            font-weight: bold;
+            height: 50px;
+        }
     </style>
     <!-- custom style -->
 </head>
@@ -242,6 +248,18 @@
                             </div>
                         </div>
                     </div> <!-- box.// -->
+                    </form>
+                    <form action="{% url 'POSApp:adminpage' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" class="stock" name="delete_data" value="123" style="display:none">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div style="margin:auto; width:100px; height:100px;">
+                            <button class="delete" type="button" id="delete_button" onclick="delete_dt()" value="asd">기록 삭제</button>
+                        </div>
+                        <button type="submit" id="delete_submit" style="display:none"></button>
                     </form>
                     {% endif %}
                 </div>
@@ -570,6 +588,18 @@
                 event.preventDefault();
             }
         }, true);
+
+        let be_sure = 0;
+        function delete_dt(){
+            if (be_sure == 0) {
+                document.getElementById('delete_button').innerText = '삭제 하려면 한 번 더 눌러주세요';
+                be_sure = 1;
+            }
+            else {
+                be_sure = 0;
+                document.getElementById('delete_submit').click()
+            }
+        }
     </script>
 </body>
 
